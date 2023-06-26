@@ -6,13 +6,13 @@ db.getCategorias = async (req, res) => {
     try {
         const {emp} = req.query
         let sql = 'SELECT c.* FROM categoria c WHERE c.empresa_id = ? AND c.estado = 1'
-        const [result] = await con.query(sql, emp)
+        const [result] = await con.query(sql, [emp])
 
-        if(result[0].length <= 0) {
+        if(result.length <= 0) {
             return res.status(404).json(0)
         }
         else{
-            return res.status(200).json(result[0])
+            return res.status(200).json(result)
         }
     } catch (e) {
         return res.status(500).json({

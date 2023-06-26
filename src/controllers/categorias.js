@@ -5,7 +5,7 @@ import {con} from '../base/conexion.js'
 db.getCategorias = async (req, res) => {
     try {
         const {emp} = req.query
-        let sql = 'CALL sp_list_categoria(?)'
+        let sql = 'SELECT c.* FROM categoria c WHERE c.empresa_id = ? AND c.estado = 1'
         const [result] = await con.query(sql, emp)
 
         if(result[0].length <= 0) {
